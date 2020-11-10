@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-        {'Created by © Sander de Bruijn '}
+        {'Created by © Kartik Dutt '}
         {new Date().getFullYear()}
         {'.'}
         </Typography>
