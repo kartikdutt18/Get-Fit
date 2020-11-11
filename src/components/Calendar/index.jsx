@@ -87,7 +87,7 @@ function Calendar(props) {
         let ref = firebase.db.ref().child(`users/${authUser.uid}/activities`);
         ref.on("value", snapshot => {
             let data = snapshot.val();
-            const values = Object.values(data);
+            const values = data != null ? Object.values(data) : [];
             // Store all active day/month combinations in array for calendar
             const arr = values.map(obj => {
                 return obj.date.length === 8
@@ -165,7 +165,7 @@ function Calendar(props) {
                     }
                 </Paper>
             </Grid>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={8} lg={9}>
                 <Paper className="paper">
                 <h3>Activities on {selectedDay.day}-{selectedDay.month + 1}</h3>
                 <ActivityList
