@@ -98,6 +98,7 @@ function AddActivity(props) {
                         <MenuItem value={1}>Lifting Weights</MenuItem>
                         <MenuItem value={2}>Running</MenuItem>
                         <MenuItem value={3}>Cycling</MenuItem>
+                        <MenuItem value={4}>Free Weights</MenuItem>
                     </Select>
                 </div>
                 <Typography id="discrete-slider" gutterBottom>
