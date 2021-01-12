@@ -74,6 +74,7 @@ function ActivityList(props) {
                         }
                         </Grid>
                       </React.Fragment>
+                      
                     </div>)
             }
     </>)

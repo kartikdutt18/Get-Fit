@@ -3,6 +3,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import LoopIcon from '@material-ui/icons/Loop';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import EventNoteIcon from '@material-ui/icons/EventNote';
@@ -40,10 +41,24 @@ function Sidebar(props) {
                 <ListSubheader inset>Menu</ListSubheader>
                 <Link to={`${match.url}`}>
                     <ListItem button>
-                        <ListItemIcon>
-                            <EventNoteIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Workouts" />
+                        <Link to='/dashboard'>
+                          <ListItemIcon>
+                              <EventNoteIcon />
+                          </ListItemIcon>
+                        </Link>
+                        <Link to='/dashboard'>
+                            <ListItemText primary="Dashboard" />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                      <Link to='/routines'>
+                          <ListItemIcon>
+                              <LoopIcon />
+                          </ListItemIcon>
+                        </Link>
+                        <Link to='/routines'>
+                            <ListItemText primary="Routines" />
+                        </Link>
                     </ListItem>
                 </Link>
             </List>

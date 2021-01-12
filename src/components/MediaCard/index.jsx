@@ -13,9 +13,12 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 220,
     margin: 5
+    
   },
   media: {
-    height: 90,
+    height: 100,
+    width: '100%',
+    objectFit: 'cover'
   },
 });
 
@@ -52,7 +55,7 @@ export default function MediaCard(props) {
         <CardMedia
           className={classes.media}
           image="https://source.unsplash.com/random/?workout"
-          title="Contemplative Reptile"
+          title="Workout"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

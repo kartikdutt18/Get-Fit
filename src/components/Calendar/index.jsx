@@ -167,7 +167,21 @@ function Calendar(props) {
             </Grid>
             <Grid item xs={12} md={8} lg={9}>
                 <Paper className="paper">
-                <h3>Activities on {selectedDay.day}-{selectedDay.month + 1}</h3>
+                <h3>Activities on {selectedDay.day}/{selectedDay.month + 1}</h3>
+                <ActivityList
+                    loading={loading}
+                    activities={activities}
+                    authUser={props.authUser}
+                    setOpenSnackbar={setOpenSnackbar}
+                    setSnackbarMsg={setSnackbarMsg}
+                    editActivity={editActivity}
+                    setEditing={setEditing}
+                />
+                </Paper>
+            </Grid>
+            <Grid item xs={12} md={8} lg={9}>
+                <Paper className="paper">
+                <h3>Targets on {selectedDay.day}/{selectedDay.month + 1}</h3>
                 <ActivityList
                     loading={loading}
                     activities={activities}
