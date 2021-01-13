@@ -69,7 +69,8 @@ function ActivityList(props) {
                                       id={i}
                                       key={i}
                                       deleteActivity={deleteActivity}
-                                      editActivity={editActivity}/>
+                                      editActivity={editActivity}
+                                      addToActivity={null}/>
                                 </Grid>)})
                         }
                         </Grid>

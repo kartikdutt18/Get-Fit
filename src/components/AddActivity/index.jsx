@@ -39,13 +39,38 @@ function AddActivity(props) {
     }
 
     const [activity, setActivity] = useState(defaultActivity);
+    const [displayMetric, setDisplayMetric] = useState('Duration')
+
+  function DisplayMetric(type) {
+    let displayType = ""
+    switch (type) {
+      case 1:
+        displayType = "Repetitions";
+        break;
+      case 2:
+        displayType = "Duration";
+        break;
+      case 3:
+        displayType = "Duration";
+        break;
+      case 4:
+        displayType = "Repetitions"
+        break;
+      default:
+        displayType = "Not set";
+    };
+
+    return displayType + " : "
+  }
 
     const handleChange = e => {
-        const { name, value } = e.target
+        const {name, value} = e.target
+        setDisplayMetric(DisplayMetric(value))
         setActivity({
             ...activity, 
             date: queryDate,
             [name]: value});
+      
     }
 
     const handleSlider = e => {
@@ -54,6 +79,8 @@ function AddActivity(props) {
     }
 
     const isValid = activity.name === '';
+
+  
 
     // Add the activity to firebase via the API made in this app
     const handleSubmit = () => {
@@ -102,7 +129,7 @@ function AddActivity(props) {
                     </Select>
                 </div>
                 <Typography id="discrete-slider" gutterBottom>
-                    Duration
+                    {displayMetric}
                 </Typography>
                 <Slider
                     defaultValue={activity.duration}

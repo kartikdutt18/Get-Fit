@@ -11,6 +11,7 @@ import CalendarHead from './calendar-head';
 import AddActivity from '../AddActivity';
 import EditActivity from '../EditActivity';
 import ActivityList from '../ActivityList';
+import RoutinesList from '../RoutinesList';
 
 function Calendar(props) {
 
@@ -83,6 +84,7 @@ function Calendar(props) {
         retrieveActiveDays();
     };
 
+    const [routines, setRoutines] = useState(true)
     const retrieveActiveDays = () => {
         let ref = firebase.db.ref().child(`users/${authUser.uid}/activities`);
         ref.on("value", snapshot => {
@@ -94,9 +96,16 @@ function Calendar(props) {
                 ? obj.date.slice(0,3)
                 : obj.date.slice(0,4)
             });
-            console.log(arr);
             setActiveDays(arr);
         });
+
+      let refRoutine = firebase.db.ref().child(`users/${authUser.uid}/routines`);
+      refRoutine.orderByChild("date").on("value", snapshot => {
+        let data = snapshot.val();
+        setRoutines(data);
+        setLoading(false);
+        // setEditing(false); Add later
+      });
     }
 
     useEffect(() => retrieveData(), [selectedDay]);
@@ -182,14 +191,13 @@ function Calendar(props) {
             <Grid item xs={12} md={8} lg={9}>
                 <Paper className="paper">
                 <h3>Targets on {selectedDay.day}/{selectedDay.month + 1}</h3>
-                <ActivityList
-                    loading={loading}
-                    activities={activities}
+                <RoutinesList
+                    selectedDay={selectedDay}
                     authUser={props.authUser}
                     setOpenSnackbar={setOpenSnackbar}
                     setSnackbarMsg={setSnackbarMsg}
-                    editActivity={editActivity}
-                    setEditing={setEditing}
+                    loading={loading}
+                    routines={routines}
                 />
                 </Paper>
             </Grid>

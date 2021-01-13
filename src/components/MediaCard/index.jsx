@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +22,29 @@ const useStyles = makeStyles({
     objectFit: 'cover'
   },
 });
+
+function DisplayMetric(type)
+{
+  let displayType = ""
+  switch (type) {
+    case 1:
+      displayType = "Repetitions";
+      break;
+    case 2:
+      displayType = "Duration";
+      break;
+    case 3:
+      displayType = "Duration";
+      break;
+    case 4:
+      displayType = "Repetitions"
+      break;
+    default:
+      displayType = "Not set";
+  };
+
+  return displayType + " : "
+}
 
 function DisplayType(type)
 {
@@ -47,7 +71,7 @@ function DisplayType(type)
 
 export default function MediaCard(props) {
   const classes = useStyles();
-  const {deleteActivity, id, editActivity, activity} = props
+  const {deleteActivity, id, editActivity, activity, addToActivity} = props
   let {name, type, duration} = activity
   return (
     <Card className={classes.root}>
@@ -65,13 +89,14 @@ export default function MediaCard(props) {
             {DisplayType(type)}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            <b>Duration : </b>{duration}
+            <b>{DisplayMetric(type)}</b>{duration}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <EditIcon onClick={e => editActivity(activity, id)}/>
-        <DeleteIcon onClick={e => deleteActivity(id)}/>
+        {editActivity != null ? <EditIcon onClick={e => editActivity(activity, id)} /> : <></>}
+        {deleteActivity != null ? <DeleteIcon onClick={e => deleteActivity(id)} /> : <></>}
+        {addToActivity == null ? <></> : <AddCircleIcon onClick={e => addToActivity(activity)}/>}
       </CardActions>
     </Card>
   );

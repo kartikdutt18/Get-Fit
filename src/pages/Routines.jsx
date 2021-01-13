@@ -21,7 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from '../config/theme.dashboard';
 
-import Calendar from '../components/Calendar';
+import RoutineCalendar from '../components/RoutineCalendar';
 import Sidebar from '../components/Sidebar';
 import Copyright from '../components/Copyright';
 
@@ -75,7 +75,16 @@ function Routines(props) {
           />
 
           <main className={classes.content, !open ? classes.contentClosed : classes.appBarShift}>
-            
+            <div className={classes.appBarSpacer} />
+            <Container maxWidth="xl" className={classes.container}>
+              <RoutineCalendar
+                firebase={props.firebase}
+                authUser={authUser}
+              />
+              <Box pt={4}>
+                <Copyright />
+              </Box>
+            </Container>
           </main>
 
         </div>
