@@ -4,12 +4,25 @@ import Paper from '@material-ui/core/Paper';
 import Snackbar from '@material-ui/core/Snackbar';
 
 
+import { makeStyles } from '@material-ui/core/styles';
 import AddRoutine from '../AddRoutine';
 import MediaCard from '../MediaCard'
+import './routine-calendar.css'
 
 import loader from '../ActivityList/loader.gif';
 
 function RoutineCalendar(props) {
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 3,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
 
   const { firebase, authUser } = props;
 
@@ -45,7 +58,7 @@ function RoutineCalendar(props) {
       name: null
     };
 
-    props.firebase.updateActivity(props.authUser.uid, emptyActivity, activityKey);
+    props.firebase.updateRoutine(props.authUser.uid, emptyActivity, activityKey);
 
     // Show notification
     setOpenSnackbar(true);
@@ -97,8 +110,9 @@ function RoutineCalendar(props) {
 
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={4} lg={3}>
+    <Grid container spacing={3} className="grid-main">
+
+      <Grid item xs={12} md={4} lg={4}>
         <Paper className="paper">
           {
             loading === true
@@ -122,38 +136,42 @@ function RoutineCalendar(props) {
         </Paper>
       </Grid>
 
-      <Grid item xs={12} md={8} lg={9}>
+      <Grid item xs={12} md={6} lg={7}>
         <Paper className="paper">
           {
             routines === null ? (<p>No Routine Found!</p>) : (
-            
-            [0, 1, 2, 3, 4, 5, 6].map((day, j) => {
-              return (
-                <div>
-                <h3>Targets on {getDay(day)}</h3>
-                <Paper className="paper">
-                <Grid container spacing={4}>
-                {
-                      Object.values(routines).filter((routine) => routine.day == day).map((routine, i) => {
-                        return (
-                          <Grid item xs={12} sm={6} md={4} key={i}>
-                            <MediaCard
-                              activity={routine}
-                              id={i}
-                              key={i}
-                              deleteActivity={deleteActivity}
-                              editActivity={null}
-                              addToActivity={null}/>
-                          </Grid>)
-                      })
-                }
-                </Grid>
-                </Paper>
-                </div>)
-            }))
+
+              [0, 1, 2, 3, 4, 5, 6].map((day, j) => {
+                return (
+                  <div>
+                    <h3>Targets on {getDay(day)}</h3>
+                    <Paper className="paper">
+                      <div className={useStyles.root}>
+                      <Grid container spacing={2}>
+                        {
+                          Object.values(routines).filter((routine) => routine.day == day).map((routine, i) => {
+                            return (
+                              <Grid item xs={12} sm={6} md={4} key={i}>
+                                <MediaCard
+                                  activity={routine}
+                                  id={i}
+                                  key={i}
+                                  deleteActivity={deleteActivity}
+                                  editActivity={null}
+                                  addToActivity={null} />
+                              </Grid>)
+                          })
+                        }
+                      </Grid>
+                      </div>
+                    </Paper>
+                  </div>)
+              }))
           }
         </Paper>
       </Grid>
+
+
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',

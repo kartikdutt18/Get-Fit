@@ -1,0 +1,25 @@
+.grid-main{
+  overflow: 'hidden';
+  width: 90vw !important;
+  display: 'flex';
+  background-color:rgb(247, 244, 240);
+}
+
+.arrow-icon {
+    padding: 5px 0 0 5px;
+}
+
+.paper {
+    padding: .25em 1.5em 1.5em 1.5em;
+    display: 'flex';
+    overflow: 'auto';
+    flex-direction: 'column';
+}
+
+svg.MuiSvgIcon-root {
+    transition: 250ms ease;
+}
+svg.MuiSvgIcon-root:hover {
+    cursor: pointer;
+    opacity: .5;
+}
