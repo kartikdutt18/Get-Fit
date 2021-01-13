@@ -61,7 +61,7 @@ function AddRoutine(props) {
 
   const handleChange = e => {
     const {name, value} = e.target
-    if (name === 'Type')
+    if (name === 'type')
       setDisplayMetric(DisplayMetric(value))
     setActivity({
       ...activity,

@@ -92,9 +92,10 @@ function Calendar(props) {
             const values = data != null ? Object.values(data) : [];
             // Store all active day/month combinations in array for calendar
             const arr = values.map(obj => {
-                return obj.date.length === 8
+                return ( typeof obj.date === 'undefined' ? 0 :
+                  obj.date.length === 8
                 ? obj.date.slice(0,3)
-                : obj.date.slice(0,4)
+                : obj.date.slice(0,4))
             });
             setActiveDays(arr);
         });
